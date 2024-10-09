@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Data for IC50 Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Input Data for IC50 Prediction</h1>
+        </header>
+        <section class="form-section">
+            <form action="/input" method="POST" enctype="multipart/form-data">
+                <label for="gene_data">Gene Expression Data (CSV/Excel):</label>
+                <input type="file" name="gene_data" required><br><br>
+
+                <label for="biomarker_data">Biomarker Data (Optional):</label>
+                <input type="file" name="biomarker_data"><br><br>
+
+                <label for="drug_type">Drug Type:</label>
+                <select name="drug_type" required>
+                    <option value="drug1">Drug 1</option>
+                    <option value="drug2">Drug 2</option>
+                </select><br><br>
+
+                <label for="cancer_type">Cancer Type:</label>
+                <select name="cancer_type" required>
+                    <option value="cell_line1">Cell Line 1</option>
+                    <option value="cell_line2">Cell Line 2</option>
+                </select><br><br>
+
+                <button type="submit" class="btn">Predict IC50</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>

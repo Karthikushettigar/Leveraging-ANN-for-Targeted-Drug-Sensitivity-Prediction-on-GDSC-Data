@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicted IC50 Value</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="result">
+        <header>
+            <h1>Predicted IC50 Value</h1>
+        </header>
+
+        <section class="result-section">
+            <p>Predicted IC50 Value:</p>
+            <input type="text" value="{{ ic50 }}" readonly class="result-text">
+
+            <div class="chart-container">
+                <canvas id="ic50Chart"></canvas>
+            </div>
+
+            <h3>What is IC50?</h3>
+            <p>A lower IC50 indicates a higher effectiveness of the drug against cancer cells.</p>
+
+            <a href="{{ url_for('download_csv', ic50=ic50) }}" class="btn">Download Results as CSV</a>
+        </section>
+
+    <!-- Chart.js inclusion -->
+    <script src="{{ url_for('static', filename='js/chart.js') }}"></script>
+    <script>
+        const ctx = document.getElementById('ic50Chart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Predicted IC50'],
+                datasets: [{
+                    label: 'IC50 Value',
+                    data: [{{ ic50 }}],
+                    backgroundColor: ['rgba(54, 162, 235, 0.6)'],
+                    borderColor: ['rgba(54, 162, 235, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
